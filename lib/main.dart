@@ -18,8 +18,12 @@ class MyApp extends StatelessWidget {
             ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 136, 195, 243)),
         useMaterial3: true,
       ),
-      home:
-          const DiaryScreen(), //MyHomePage(title: 'Droppy Demo Welcome Screen'),
+      initialRoute: '/dnevnik',
+      routes: {
+        '/': (context) => const MyHomePage(title: "Home Page"),
+        '/dnevnik': (context) => DiaryScreen(),
+        //'/vaje': (context) => SecondScreen(),
+      },
     );
   }
 }
