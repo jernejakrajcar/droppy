@@ -1,4 +1,7 @@
 import 'package:droppy/screens/diary_screen.dart';
+import 'package:droppy/screens/exercises_screen.dart';
+import 'package:droppy/screens/mood_tracker_screen.dart';
+import 'package:droppy/screens/relaxation_games_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,7 +25,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const MyHomePage(title: "Home Page"),
         '/dnevnik': (context) => DiaryScreen(),
-        //'/vaje': (context) => SecondScreen(),
+        '/moodTracker': (context) => MoodTrackerScreen(),
+        '/vaje': (context) => ExercisesScreen(),
+        '/igre': (context) => GamesScreen(),
       },
     );
   }
@@ -73,7 +78,10 @@ class _MyHomePageState extends State<MyHomePage> {
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+
+        //backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        centerTitle: true,
+        backgroundColor: Color.fromARGB(255, 154, 187, 222),
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
@@ -81,6 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
+
         child: Column(
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
@@ -97,21 +106,37 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            SizedBox(height: 20, width: 50),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/igre');
+              },
+              child: Text('Relaxation Games'),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            SizedBox(height: 20, width: 50),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/moodTracker');
+              },
+              child: Text('Mood Tracker'),
+            ),
+            SizedBox(height: 20, width: 50),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/vaje');
+              },
+              child: Text('Exercises'),
+            ),
+            SizedBox(height: 20, width: 50),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/dnevnik');
+              },
+              child: Text('Diary'),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
