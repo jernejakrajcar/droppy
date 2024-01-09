@@ -3,10 +3,11 @@ import 'package:droppy/screens/exercises_screen.dart';
 import 'package:droppy/screens/mood_tracker_screen.dart';
 import 'package:droppy/screens/relaxation_games_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:droppy/services/isar_service.dart';
 
 void main() {
   runApp(const MyApp());
-  // IsarService isarService = IsarService();
+  IsarService isarService = IsarService();
 }
 
 class MyApp extends StatelessWidget {
