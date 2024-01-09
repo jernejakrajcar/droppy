@@ -1,5 +1,6 @@
 import 'package:droppy/entities/diary_entry.dart';
 import 'package:droppy/entities/exercise.dart';
+import 'package:droppy/entities/diary.dart';
 // import 'package:droppy/lib/entities/mood_tracker.dart';
 // import 'package:droppy/lib/entities/relaxation_games.dart';
 import 'package:path_provider/path_provider.dart';
@@ -16,6 +17,7 @@ class IsarService {
     //deleteAllGifts();
     initializeExercises();
     initializeDiaryEntry();
+    initializeDiary();
   }
   Future<void> initializeExercises() async {
     isar = await db;
@@ -25,6 +27,11 @@ class IsarService {
   Future<void> initializeDiaryEntry() async {
     isar = await db;
     final diaryEntrys = getAllDiaries();
+  }
+
+  Future<void> initializeDiary() async {
+    isar = await db;
+    final diarys = getAllDiaries();
   }
 
   Future<void> saveExercise(Exercise newExercises) async {
@@ -60,11 +67,18 @@ class IsarService {
     return exerciseQuery.findAll();
   }
 
-  Future<List<DiaryEntry>> getAllDiaries() async {
+  Future<List<Diary>> getAllDiaries() async {
     final isar = await db;
-    final diaryQuery = isar.diaryEntrys.where();
+    final diaryQuery = isar.diarys.where();
     print(diaryQuery);
     return diaryQuery.findAll();
+  }
+
+  Future<List<DiaryEntry>> getAllDiaryEntries() async {
+    final isar = await db;
+    final diaryEntryQuery = isar.diaryEntrys.where();
+    print(diaryEntryQuery);
+    return diaryEntryQuery.findAll();
   }
 
   Future<void> cleanDb() async {
@@ -95,7 +109,7 @@ class IsarService {
 
     if (Isar.instanceNames.isEmpty) {
       return await Isar.open(
-        [ExerciseSchema, DiaryEntrySchema],
+        [ExerciseSchema, DiaryEntrySchema, DiarySchema],
         inspector: true,
         directory: path,
       );
