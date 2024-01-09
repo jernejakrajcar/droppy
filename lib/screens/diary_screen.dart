@@ -16,16 +16,18 @@ class DiaryScreen extends StatelessWidget {
       body: Stack(
         children: [
           Container(
+            color: Color.fromARGB(
+                255, 154, 187, 222), // Adjust the opacity and color as needed
+          ),
+          Container(
+            width: 200, // Set the desired width
+            height: 200, // Set the desired height
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/droppy.png'),
                 fit: BoxFit.cover,
               ),
             ),
-          ),
-          Container(
-            color: Color.fromARGB(
-                255, 154, 187, 222), // Adjust the opacity and color as needed
           ),
           ListView(
             padding: EdgeInsets.all(15),

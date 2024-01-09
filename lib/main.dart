@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
+  // IsarService isarService = IsarService();
 }
 
 class MyApp extends StatelessWidget {
@@ -86,55 +87,89 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
+      body: Container(
+        color: Color.fromARGB(
+            255, 154, 187, 222), // Adjust the opacity and color as needed
+
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
 
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: 20, width: 50),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/igre');
-              },
-              child: Text('Relaxation Games'),
-            ),
-            SizedBox(height: 20, width: 50),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/moodTracker');
-              },
-              child: Text('Mood Tracker'),
-            ),
-            SizedBox(height: 20, width: 50),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/vaje');
-              },
-              child: Text('Exercises'),
-            ),
-            SizedBox(height: 20, width: 50),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/dnevnik');
-              },
-              child: Text('Diary'),
-            ),
-          ],
+        child: Center(
+          // Your existing content goes here
+          child: Column(
+            // Column is also a layout widget. It takes a list of children and
+            // arranges them vertically. By default, it sizes itself to fit its
+            // children horizontally, and tries to be as tall as its parent.
+            //
+            // Column has various properties to control how it sizes itself and
+            // how it positions its children. Here we use mainAxisAlignment to
+            // center the children vertically; the main axis here is the vertical
+            // axis because Columns are vertical (the cross axis would be
+            // horizontal).
+            //
+            // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
+            // action in the IDE, or press "p" in the console), to see the
+            // wireframe for each widget.
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(
+                      255, 89, 130, 197), // Set the background color of the box
+                  border:
+                      Border.all(color: Colors.black), // Set the border color
+                  borderRadius:
+                      BorderRadius.circular(12.0), // Set the border radius
+                ),
+                padding: EdgeInsets.all(20), // Add padding to the container
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    ButtonTheme(
+                      minWidth:
+                          double.infinity, // Set a fixed width for the buttons
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/igre');
+                        },
+                        child: Text('Relaxation Games'),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    ButtonTheme(
+                      minWidth: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/moodTracker');
+                        },
+                        child: Text('Mood Tracker'),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    ButtonTheme(
+                      minWidth: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/vaje');
+                        },
+                        child: Text('Exercises'),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    ButtonTheme(
+                      minWidth: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/dnevnik');
+                        },
+                        child: Text('Diary'),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
