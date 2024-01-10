@@ -11,8 +11,33 @@ class ExercisesScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 154, 187, 222),
       ),
-      body: Stack(
-        children: [],
+      body: Container(
+        color: Color.fromARGB(
+            255, 154, 187, 222), // Adjust the opacity and color as needed
+
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: 500,
+                height: 500,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 255, 255,
+                      255), // Set the background color of the box
+                  border: Border.all(
+                      color: Color.fromARGB(
+                          255, 89, 130, 197)), // Set the border color
+                  borderRadius:
+                      BorderRadius.circular(12.0), // Set the border radius
+                ),
+                //=========USEBINA V KONTENERJU!!!===========
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
