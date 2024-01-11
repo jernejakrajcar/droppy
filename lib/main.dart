@@ -1,7 +1,14 @@
 import 'package:droppy/screens/diary_screen.dart';
+import 'package:droppy/screens/exercises/grateful_screen.dart';
 import 'package:droppy/screens/exercises_screen.dart';
 import 'package:droppy/screens/mood_tracker_screen.dart';
 import 'package:droppy/screens/relaxation_games_screen.dart';
+
+import 'package:droppy/screens/exercises/yoga_screen.dart';
+import 'package:droppy/screens/exercises/meditation_screen.dart';
+import 'package:droppy/screens/exercises/breathing_screen.dart';
+import 'package:droppy/screens/exercises/yoga_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:droppy/services/isar_service.dart';
 
@@ -30,6 +37,10 @@ class MyApp extends StatelessWidget {
         '/moodTracker': (context) => MoodTrackerScreen(),
         '/vaje': (context) => ExercisesScreen(),
         '/igre': (context) => GamesScreen(),
+        '/yoga': (context) => YogaScreen(),
+        '/meditation': (context) => MeditationScreen(),
+        '/breathing': (context) => BreathingScreen(),
+        '/grateful': (context) => GratefulScreen(),
       },
     );
   }
