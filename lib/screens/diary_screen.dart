@@ -7,6 +7,8 @@ class DiaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final questionWidth = screenWidth * 0.5;
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Diary'),
@@ -29,15 +31,32 @@ class DiaryScreen extends StatelessWidget {
               ),
             ),
           ),
+          Container(
+              height: 50,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(width: 200, height: 50),
+                      Container(
+                        width: 200,
+                        height: 50,
+                        child: Text(
+                          _generateRandomQuestion(),
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              )),
           ListView(
             padding: EdgeInsets.all(15),
             children: [
-              const SizedBox(height: 100),
-              Text(
-                _generateRandomQuestion(),
-                style: TextStyle(fontSize: 20),
-              ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 110),
               TextField(
                 maxLines: 20,
                 decoration: InputDecoration(
