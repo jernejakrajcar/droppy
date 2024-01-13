@@ -79,6 +79,8 @@ flutter:
     - assets/meditation_icon.png
     - assets/breathing_icon.png
     - assets/grateful_icon.png
+    - assets/droppy_horizontally.png
+    - assets/Undo.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
