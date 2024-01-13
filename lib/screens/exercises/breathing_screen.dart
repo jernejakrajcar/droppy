@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BreathingScreen extends StatelessWidget {
-  const BreathingScreen({Key? key}) : super(key: key);
+  const BreathingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -9,16 +9,16 @@ class BreathingScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Breathing'),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 154, 187, 222),
+        backgroundColor: const Color.fromARGB(255, 154, 187, 222),
       ),
       body: Container(
-        color: Color.fromARGB(
+        color: const Color.fromARGB(
             255, 154, 187, 222), // Adjust the opacity and color as needed
 
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
 
-        child: Center(
+        child: const Center(
           child: Column(
             children: [
               // Top Container for Image
@@ -36,6 +36,8 @@ class BreathingScreen extends StatelessWidget {
 }
 
 class BreathingImageContainer extends StatelessWidget {
+  const BreathingImageContainer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,7 +47,7 @@ class BreathingImageContainer extends StatelessWidget {
           child: Container(
             width: 140, // Adjusted width to match BreathingImageContainer
             height: 150, // Adjusted height to match BreathingImageContainer
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/droppy_horizontally.png"), // Updated to use local image
                 fit: BoxFit.contain,
@@ -59,18 +61,20 @@ class BreathingImageContainer extends StatelessWidget {
 }
 
 class BreathingBottomContainer extends StatelessWidget {
+  const BreathingBottomContainer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 450,
       height: 395,
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Color(0xFF5982C5), width: 2),
+        border: Border.all(color: const Color(0xFF5982C5), width: 2),
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Column(
+      child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           BreathingItemWidget('Mindful breathing', '3 min'),
@@ -87,17 +91,17 @@ class BreathingItemWidget extends StatelessWidget {
   final String title;
   final String duration;
 
-  const BreathingItemWidget(this.title, this.duration);
+  const BreathingItemWidget(this.title, this.duration, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 75,
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        color: Color(0xFF5982C5),
+        color: const Color(0xFF5982C5),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -105,11 +109,11 @@ class BreathingItemWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            style: const TextStyle(color: Colors.white, fontSize: 18),
           ),
           Text(
             duration,
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            style: const TextStyle(color: Colors.white, fontSize: 18),
           ),
         ],
       ),
@@ -118,6 +122,8 @@ class BreathingItemWidget extends StatelessWidget {
 }
 
 class UndoBreathingImageContainer extends StatelessWidget {
+  const UndoBreathingImageContainer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -126,7 +132,7 @@ class UndoBreathingImageContainer extends StatelessWidget {
         Navigator.of(context).pop();
       },
       child: Container(
-        margin: EdgeInsets.only(bottom: 10),
+        margin: const EdgeInsets.only(bottom: 10),
         child: Stack(
           children: [
             // Container for the white border
@@ -156,7 +162,7 @@ class UndoBreathingImageContainer extends StatelessWidget {
               ),
             ),
             // Arrow pointing to the middle of the white border
-            Positioned(
+            const Positioned(
               top: 50,
               left: 75,
               child: Icon(

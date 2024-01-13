@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ExercisesScreen extends StatelessWidget {
-  const ExercisesScreen({Key? key}) : super(key: key);
+  const ExercisesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 154, 187, 222),
+      backgroundColor: const Color.fromARGB(255, 154, 187, 222),
       appBar: AppBar(
         title: const Text('Exercises'),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 154, 187, 222),
+        backgroundColor: const Color.fromARGB(255, 154, 187, 222),
       ),
       body: Center(
         child: Container(
@@ -19,14 +19,14 @@ class ExercisesScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(
-              color: Color.fromARGB(255, 154, 187, 222),
+              color: const Color.fromARGB(255, 154, 187, 222),
             ),
             borderRadius: BorderRadius.circular(12.0),
           ),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, // 2 columns
                 crossAxisSpacing: 16.0,
                 mainAxisSpacing: 16.0,
@@ -52,11 +52,11 @@ class ExercisesScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 8.0),
+                      const SizedBox(height: 8.0),
                       Text(
                         getTitle(index), // Replace with your text
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -77,13 +77,13 @@ String getImgName(int imgInt) {
   String s = "assets/";
   switch (imgInt) {
     case 0:
-      return s + "yoga_icon.png";
+      return "${s}yoga_icon.png";
     case 1:
-      return s + "meditation_icon.png";
+      return "${s}meditation_icon.png";
     case 2:
-      return s + "breathing_icon.png";
+      return "${s}breathing_icon.png";
     case 3:
-      return s + "grateful_icon.png";
+      return "${s}grateful_icon.png";
   }
   print("error in Image index number");
   return "";

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class GratefulScreen extends StatelessWidget {
-  const GratefulScreen({Key? key}) : super(key: key);
+  const GratefulScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -9,16 +9,16 @@ class GratefulScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Grateful'),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 154, 187, 222),
+        backgroundColor: const Color.fromARGB(255, 154, 187, 222),
       ),
       body: Container(
-        color: Color.fromARGB(
+        color: const Color.fromARGB(
             255, 154, 187, 222), // Adjust the opacity and color as needed
 
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
 
-        child: Center(
+        child: const Center(
           child: Column(
             children: [
               // Top Container for Image
@@ -36,6 +36,8 @@ class GratefulScreen extends StatelessWidget {
 }
 
 class GratefulImageContainer extends StatelessWidget {
+  const GratefulImageContainer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,7 +47,7 @@ class GratefulImageContainer extends StatelessWidget {
           child: Container(
             width: 140, // Adjusted width to match GratefulImageContainer
             height: 150, // Adjusted height to match GratefulImageContainer
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/droppy_horizontally.png"), // Updated to use local image
                 fit: BoxFit.contain,
@@ -59,18 +61,20 @@ class GratefulImageContainer extends StatelessWidget {
 }
 
 class GratefulBottomContainer extends StatelessWidget {
+  const GratefulBottomContainer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 450,
       height: 395,
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Color(0xFF5982C5), width: 2),
+        border: Border.all(color: const Color(0xFF5982C5), width: 2),
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Column(
+      child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GratefulItemWidget('5 things a day', '5 min'),
@@ -87,17 +91,17 @@ class GratefulItemWidget extends StatelessWidget {
   final String title;
   final String duration;
 
-  const GratefulItemWidget(this.title, this.duration);
+  const GratefulItemWidget(this.title, this.duration, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 75,
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        color: Color(0xFF5982C5),
+        color: const Color(0xFF5982C5),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -105,11 +109,11 @@ class GratefulItemWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            style: const TextStyle(color: Colors.white, fontSize: 18),
           ),
           Text(
             duration,
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            style: const TextStyle(color: Colors.white, fontSize: 18),
           ),
         ],
       ),
@@ -118,6 +122,8 @@ class GratefulItemWidget extends StatelessWidget {
 }
 
 class UndoGratefulImageContainer extends StatelessWidget {
+  const UndoGratefulImageContainer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -126,7 +132,7 @@ class UndoGratefulImageContainer extends StatelessWidget {
         Navigator.of(context).pop();
       },
       child: Container(
-        margin: EdgeInsets.only(bottom: 10),
+        margin: const EdgeInsets.only(bottom: 10),
         child: Stack(
           children: [
             // Container for the white border
@@ -156,7 +162,7 @@ class UndoGratefulImageContainer extends StatelessWidget {
               ),
             ),
             // Arrow pointing to the middle of the white border
-            Positioned(
+            const Positioned(
               top: 50,
               left: 75,
               child: Icon(
