@@ -26,6 +26,11 @@ const DiaryEntrySchema = CollectionSchema(
       id: 1,
       name: r'entryDate',
       type: IsarType.dateTime,
+    ),
+    r'questionId': PropertySchema(
+      id: 2,
+      name: r'questionId',
+      type: IsarType.long,
     )
   },
   estimateSize: _diaryEntryEstimateSize,
@@ -39,12 +44,6 @@ const DiaryEntrySchema = CollectionSchema(
       id: 1817946251862095681,
       name: r'diary',
       target: r'Diary',
-      single: true,
-    ),
-    r'question': LinkSchema(
-      id: -1858185776153171964,
-      name: r'question',
-      target: r'Question',
       single: true,
     )
   },
@@ -73,6 +72,7 @@ void _diaryEntrySerialize(
 ) {
   writer.writeString(offsets[0], object.content);
   writer.writeDateTime(offsets[1], object.entryDate);
+  writer.writeLong(offsets[2], object.questionId);
 }
 
 DiaryEntry _diaryEntryDeserialize(
@@ -84,6 +84,7 @@ DiaryEntry _diaryEntryDeserialize(
   final object = DiaryEntry(
     content: reader.readString(offsets[0]),
     entryDate: reader.readDateTime(offsets[1]),
+    questionId: reader.readLong(offsets[2]),
   );
   object.id = id;
   return object;
@@ -100,6 +101,8 @@ P _diaryEntryDeserializeProp<P>(
       return (reader.readString(offset)) as P;
     case 1:
       return (reader.readDateTime(offset)) as P;
+    case 2:
+      return (reader.readLong(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -110,13 +113,12 @@ Id _diaryEntryGetId(DiaryEntry object) {
 }
 
 List<IsarLinkBase<dynamic>> _diaryEntryGetLinks(DiaryEntry object) {
-  return [object.diary, object.question];
+  return [object.diary];
 }
 
 void _diaryEntryAttach(IsarCollection<dynamic> col, Id id, DiaryEntry object) {
   object.id = id;
   object.diary.attach(col, col.isar.collection<Diary>(), r'diary', id);
-  object.question.attach(col, col.isar.collection<Question>(), r'question', id);
 }
 
 extension DiaryEntryQueryWhereSort
@@ -436,6 +438,61 @@ extension DiaryEntryQueryFilter
       ));
     });
   }
+
+  QueryBuilder<DiaryEntry, DiaryEntry, QAfterFilterCondition> questionIdEqualTo(
+      int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'questionId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<DiaryEntry, DiaryEntry, QAfterFilterCondition>
+      questionIdGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'questionId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<DiaryEntry, DiaryEntry, QAfterFilterCondition>
+      questionIdLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'questionId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<DiaryEntry, DiaryEntry, QAfterFilterCondition> questionIdBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'questionId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
 }
 
 extension DiaryEntryQueryObject
@@ -453,19 +510,6 @@ extension DiaryEntryQueryLinks
   QueryBuilder<DiaryEntry, DiaryEntry, QAfterFilterCondition> diaryIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.linkLength(r'diary', 0, true, 0, true);
-    });
-  }
-
-  QueryBuilder<DiaryEntry, DiaryEntry, QAfterFilterCondition> question(
-      FilterQuery<Question> q) {
-    return QueryBuilder.apply(this, (query) {
-      return query.link(q, r'question');
-    });
-  }
-
-  QueryBuilder<DiaryEntry, DiaryEntry, QAfterFilterCondition> questionIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.linkLength(r'question', 0, true, 0, true);
     });
   }
 }
@@ -493,6 +537,18 @@ extension DiaryEntryQuerySortBy
   QueryBuilder<DiaryEntry, DiaryEntry, QAfterSortBy> sortByEntryDateDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'entryDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<DiaryEntry, DiaryEntry, QAfterSortBy> sortByQuestionId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'questionId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiaryEntry, DiaryEntry, QAfterSortBy> sortByQuestionIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'questionId', Sort.desc);
     });
   }
 }
@@ -534,6 +590,18 @@ extension DiaryEntryQuerySortThenBy
       return query.addSortBy(r'id', Sort.desc);
     });
   }
+
+  QueryBuilder<DiaryEntry, DiaryEntry, QAfterSortBy> thenByQuestionId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'questionId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiaryEntry, DiaryEntry, QAfterSortBy> thenByQuestionIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'questionId', Sort.desc);
+    });
+  }
 }
 
 extension DiaryEntryQueryWhereDistinct
@@ -548,6 +616,12 @@ extension DiaryEntryQueryWhereDistinct
   QueryBuilder<DiaryEntry, DiaryEntry, QDistinct> distinctByEntryDate() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'entryDate');
+    });
+  }
+
+  QueryBuilder<DiaryEntry, DiaryEntry, QDistinct> distinctByQuestionId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'questionId');
     });
   }
 }
@@ -569,6 +643,12 @@ extension DiaryEntryQueryProperty
   QueryBuilder<DiaryEntry, DateTime, QQueryOperations> entryDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'entryDate');
+    });
+  }
+
+  QueryBuilder<DiaryEntry, int, QQueryOperations> questionIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'questionId');
     });
   }
 }
