@@ -14,8 +14,8 @@ class ExercisesScreen extends StatelessWidget {
       ),
       body: Center(
         child: Container(
-          width: 400, // Adjust the width as needed
-          height: 400, // Adjust the height as needed
+          width: 360, // Adjust the width as needed
+          height: 360, // Adjust the height as needed
           decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(
@@ -118,3 +118,4 @@ String getTitle(imgInt) {
   print("error in Image Name index number");
   return "";
 }
+
