@@ -3,6 +3,7 @@ import 'package:droppy/entities/diary_entry.dart';
 import 'package:droppy/services/isar_service.dart';
 import 'package:flutter/material.dart';
 import 'package:droppy/entities/question.dart';
+import 'package:isar/isar.dart';
 
 class DiaryScreen extends StatefulWidget {
   const DiaryScreen({Key? key}) : super(key: key);
@@ -12,7 +13,8 @@ class DiaryScreen extends StatefulWidget {
 }
 
 class _DiaryScreenState extends State<DiaryScreen> {
-  late String currentQuestion;
+  late String currentQuestion = '';
+  late Id currentQuestionId = 0;
   late TextEditingController _textEditingController;
 
   @override
@@ -90,8 +92,8 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    _saveDiaryEntry(
-                        builderContext, _textEditingController.text);
+                    _saveDiaryEntry(builderContext, _textEditingController.text,
+                        currentQuestion);
                   },
                   child: Text('Save'),
                 ),
@@ -118,6 +120,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
 
       setState(() {
         currentQuestion = questions[questionIndex].text;
+        currentQuestionId = questions[questionIndex].id;
       });
     }
   }
@@ -157,13 +160,18 @@ class _DiaryScreenState extends State<DiaryScreen> {
     return "Hi.";
   }*/
 
-  void _saveDiaryEntry(BuildContext context, String text) async {
+  void _saveDiaryEntry(
+      BuildContext context, String text, String currentQuestion) async {
     DateTime currentDate = DateTime.now();
+
     DiaryEntry newDiaryEntry = DiaryEntry(
       entryDate: currentDate,
       content: text,
+      questionId: currentQuestionId,
     );
-
+    print("To je QUESTION ID: ");
+    print(currentQuestionId);
+    // Set the question ID in the Diary Entry
     await IsarService().saveDiaries(newDiaryEntry);
 
     ScaffoldMessenger.of(context).showSnackBar(

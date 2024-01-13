@@ -10,9 +10,13 @@ class DiaryEntry {
 
   late DateTime entryDate;
   late String content;
+  late int questionId;
 
   final diary = IsarLink<Diary>();
-  final question = IsarLink<Question>();
+  //final question = IsarLink<Question>();
 
-  DiaryEntry({required this.entryDate, required this.content});
+  DiaryEntry(
+      {required this.entryDate,
+      required this.content,
+      required this.questionId});
 }
