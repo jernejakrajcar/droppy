@@ -40,6 +40,12 @@ const DiaryEntrySchema = CollectionSchema(
       name: r'diary',
       target: r'Diary',
       single: true,
+    ),
+    r'question': LinkSchema(
+      id: -1858185776153171964,
+      name: r'question',
+      target: r'Question',
+      single: true,
     )
   },
   embeddedSchemas: {},
@@ -104,12 +110,13 @@ Id _diaryEntryGetId(DiaryEntry object) {
 }
 
 List<IsarLinkBase<dynamic>> _diaryEntryGetLinks(DiaryEntry object) {
-  return [object.diary];
+  return [object.diary, object.question];
 }
 
 void _diaryEntryAttach(IsarCollection<dynamic> col, Id id, DiaryEntry object) {
   object.id = id;
   object.diary.attach(col, col.isar.collection<Diary>(), r'diary', id);
+  object.question.attach(col, col.isar.collection<Question>(), r'question', id);
 }
 
 extension DiaryEntryQueryWhereSort
@@ -446,6 +453,19 @@ extension DiaryEntryQueryLinks
   QueryBuilder<DiaryEntry, DiaryEntry, QAfterFilterCondition> diaryIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.linkLength(r'diary', 0, true, 0, true);
+    });
+  }
+
+  QueryBuilder<DiaryEntry, DiaryEntry, QAfterFilterCondition> question(
+      FilterQuery<Question> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.link(q, r'question');
+    });
+  }
+
+  QueryBuilder<DiaryEntry, DiaryEntry, QAfterFilterCondition> questionIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'question', 0, true, 0, true);
     });
   }
 }

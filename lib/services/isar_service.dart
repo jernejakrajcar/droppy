@@ -45,9 +45,9 @@ class IsarService {
     isar.writeTxnSync(() => isar.exercises.putSync(newExercises));
   }
 
-  Future<void> saveDiaries(DiaryEntry newDiaries) async {
+  Future<void> saveDiaries(DiaryEntry newEntry) async {
     final isar = await db;
-    isar.writeTxnSync(() => isar.diaryEntrys.putSync(newDiaries));
+    isar.writeTxnSync(() => isar.diaryEntrys.putSync(newEntry));
   }
 
   Future<void> saveQuestion(Question newQuestion) async {
