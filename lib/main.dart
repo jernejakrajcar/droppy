@@ -8,6 +8,7 @@ import 'package:droppy/screens/exercises/yoga_screen.dart';
 import 'package:droppy/screens/exercises/meditation_screen.dart';
 import 'package:droppy/screens/exercises/breathing_screen.dart';
 import 'package:droppy/screens/exercises/yoga_screen.dart';
+import 'package:droppy/screens/yoga/stretching_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:droppy/services/isar_service.dart';
@@ -42,6 +43,8 @@ class MyApp extends StatelessWidget {
         '/meditation': (context) => MeditationScreen(),
         '/breathing': (context) => BreathingScreen(),
         '/grateful': (context) => GratefulScreen(),
+        '/stretching': (context) => StretchingScreen(),
+
       },
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class YogaScreen extends StatelessWidget {
   const YogaScreen({Key? key}) : super(key: key);
 
@@ -69,7 +70,13 @@ class YogaBottomContainer extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          YogaItemWidget('Stretching', '10 min'),
+          GestureDetector(
+            onTap: () {
+              // Navigate to the specified route using imgLink method
+              Navigator.pushNamed(context, imgLink(0));
+            },
+            child: YogaItemWidget('Stretching', '10 min'),
+          ),
           YogaItemWidget('Advanced', '20 min'),
           YogaItemWidget('Beginner', '15 min'),
           YogaItemWidget('De-stress', '5 min'),
@@ -166,4 +173,19 @@ class UndoImageContainer extends StatelessWidget {
       ),
     );
   }
+}
+
+String imgLink(int imgInt) {
+  switch (imgInt) {
+    case 0:
+      return "/stretching";
+    case 1:
+      return "/meditation";
+    case 2:
+      return "/breathing";
+    case 3:
+      return "/grateful";
+  }
+  print("error in Image link index number");
+  return "";
 }
