@@ -1,7 +1,15 @@
 import 'package:droppy/screens/diary_screen.dart';
+import 'package:droppy/screens/exercises/grateful_screen.dart';
 import 'package:droppy/screens/exercises_screen.dart';
 import 'package:droppy/screens/mood_tracker_screen.dart';
 import 'package:droppy/screens/relaxation_games_screen.dart';
+
+import 'package:droppy/screens/exercises/yoga_screen.dart';
+import 'package:droppy/screens/exercises/meditation_screen.dart';
+import 'package:droppy/screens/exercises/breathing_screen.dart';
+import 'package:droppy/screens/exercises/yoga_screen.dart';
+import 'package:droppy/screens/yoga/stretching_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:droppy/services/isar_service.dart';
 
@@ -17,6 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Droppy Demo',
       theme: ThemeData(
         colorScheme:
@@ -30,6 +39,12 @@ class MyApp extends StatelessWidget {
         '/moodTracker': (context) => MoodTrackerScreen(),
         '/vaje': (context) => ExercisesScreen(),
         '/igre': (context) => GamesScreen(),
+        '/yoga': (context) => YogaScreen(),
+        '/meditation': (context) => MeditationScreen(),
+        '/breathing': (context) => BreathingScreen(),
+        '/grateful': (context) => GratefulScreen(),
+        '/stretching': (context) => StretchingScreen(),
+
       },
     );
   }
@@ -111,8 +126,19 @@ class _MyHomePageState extends State<MyHomePage> {
             // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
             // action in the IDE, or press "p" in the console), to see the
             // wireframe for each widget.
+
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Container(
+                width: 200, // Set the desired width
+                height: 200, // Set the desired height
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/droppy.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
               Container(
                 decoration: BoxDecoration(
                   color: Color.fromARGB(
