@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:droppy/entities/diary_entry.dart';
 import 'package:droppy/services/isar_service.dart';
 import 'package:flutter/material.dart';
+import 'package:droppy/entities/question.dart';
 
 class DiaryScreen extends StatefulWidget {
   const DiaryScreen({Key? key}) : super(key: key);
@@ -17,8 +18,9 @@ class _DiaryScreenState extends State<DiaryScreen> {
   @override
   void initState() {
     super.initState();
-    currentQuestion = _generateRandomQuestion();
+    //currentQuestion = _generateRandomQuestion();
     _textEditingController = TextEditingController();
+    _loadQuestions();
   }
 
   @override
@@ -101,7 +103,31 @@ class _DiaryScreenState extends State<DiaryScreen> {
     );
   }
 
+  Future<void> _loadQuestions() async {
+    List<Question> questions = await IsarService().getAllQuestions();
+    print(questions[1].text);
+
+    if (questions.isEmpty) {
+      // If there are no questions, return a default message
+      setState(() {
+        currentQuestion = "Hi.";
+      });
+    } else {
+      Random random = Random();
+      int questionIndex = random.nextInt(questions.length);
+
+      setState(() {
+        currentQuestion = questions[questionIndex].text;
+      });
+    }
+  }
+
   String _generateRandomQuestion() {
+    _loadQuestions();
+    return currentQuestion;
+  }
+
+  /*String _generateRandomQuestion() {
     Random random = Random();
     int questionNum = random.nextInt(10);
 
@@ -129,7 +155,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
     }
 
     return "Hi.";
-  }
+  }*/
 
   void _saveDiaryEntry(BuildContext context, String text) async {
     DateTime currentDate = DateTime.now();
