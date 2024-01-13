@@ -28,7 +28,21 @@ const QuestionSchema = CollectionSchema(
   deserialize: _questionDeserialize,
   deserializeProp: _questionDeserializeProp,
   idName: r'id',
-  indexes: {},
+  indexes: {
+    r'text': IndexSchema(
+      id: 5145922347574273553,
+      name: r'text',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'text',
+          type: IndexType.hash,
+          caseSensitive: true,
+        )
+      ],
+    )
+  },
   links: {},
   embeddedSchemas: {},
   getId: _questionGetId,
@@ -166,6 +180,50 @@ extension QuestionQueryWhere on QueryBuilder<Question, Question, QWhereClause> {
         upper: upperId,
         includeUpper: includeUpper,
       ));
+    });
+  }
+
+  QueryBuilder<Question, Question, QAfterWhereClause> textEqualTo(String text) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'text',
+        value: [text],
+      ));
+    });
+  }
+
+  QueryBuilder<Question, Question, QAfterWhereClause> textNotEqualTo(
+      String text) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'text',
+              lower: [],
+              upper: [text],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'text',
+              lower: [text],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'text',
+              lower: [text],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'text',
+              lower: [],
+              upper: [text],
+              includeUpper: false,
+            ));
+      }
     });
   }
 }

@@ -109,6 +109,12 @@ class IsarService {
     return isar.questions.get(id);
   }
 
+  Future<Question?> getQuestionByText(String text) async {
+    final isar = await db;
+    final query = isar.questions.where().filter().textEqualTo(text).build();
+    return query.findFirst();
+  }
+
   Future<Exercise?> getExerciseById(int id) async {
     final isar = await db;
     return isar.exercises.get(id);
