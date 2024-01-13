@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 
 class YogaScreen extends StatelessWidget {
-  const YogaScreen({Key? key}) : super(key: key);
+  const YogaScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,11 +10,11 @@ class YogaScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Yoga'),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 154, 187, 222),
+        backgroundColor: const Color.fromARGB(255, 154, 187, 222),
       ),
       body: Container(
-        color: Color.fromARGB(255, 164, 187, 223),
-        child: Center(
+        color: const Color.fromARGB(255, 164, 187, 223),
+        child: const Center(
           child: Column(
             children: [
               // Top Container for Image
@@ -32,6 +32,8 @@ class YogaScreen extends StatelessWidget {
 }
 
 class YogaImageContainer extends StatelessWidget {
+  const YogaImageContainer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -41,7 +43,7 @@ class YogaImageContainer extends StatelessWidget {
           child: Container(
             width: 140, // Adjusted width to match YogaImageContainer
             height: 150, // Adjusted height to match YogaImageContainer
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/droppy_horizontally.png"), // Updated to use local image
                 fit: BoxFit.contain,
@@ -56,15 +58,17 @@ class YogaImageContainer extends StatelessWidget {
 
 
 class YogaBottomContainer extends StatelessWidget {
+  const YogaBottomContainer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 450,
       height: 395,
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Color(0xFF5982C5), width: 2),
+        border: Border.all(color: const Color(0xFF5982C5), width: 2),
         borderRadius: BorderRadius.circular(15),
       ),
       child: Column(
@@ -75,11 +79,11 @@ class YogaBottomContainer extends StatelessWidget {
               // Navigate to the specified route using imgLink method
               Navigator.pushNamed(context, imgLink(0));
             },
-            child: YogaItemWidget('Stretching', '10 min'),
+            child: const YogaItemWidget('Stretching', '10 min'),
           ),
-          YogaItemWidget('Advanced', '20 min'),
-          YogaItemWidget('Beginner', '15 min'),
-          YogaItemWidget('De-stress', '5 min'),
+          const YogaItemWidget('Advanced', '20 min'),
+          const YogaItemWidget('Beginner', '15 min'),
+          const YogaItemWidget('De-stress', '5 min'),
         ],
       ),
     );
@@ -90,17 +94,17 @@ class YogaItemWidget extends StatelessWidget {
   final String title;
   final String duration;
 
-  const YogaItemWidget(this.title, this.duration);
+  const YogaItemWidget(this.title, this.duration, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 75,
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        color: Color(0xFF5982C5),
+        color: const Color(0xFF5982C5),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -108,11 +112,11 @@ class YogaItemWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            style: const TextStyle(color: Colors.white, fontSize: 18),
           ),
           Text(
             duration,
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            style: const TextStyle(color: Colors.white, fontSize: 18),
           ),
         ],
       ),
@@ -121,6 +125,8 @@ class YogaItemWidget extends StatelessWidget {
 }
 
 class UndoImageContainer extends StatelessWidget {
+  const UndoImageContainer({super.key});
+
   @override
   Widget build(BuildContext context){
     return GestureDetector(
@@ -129,7 +135,7 @@ class UndoImageContainer extends StatelessWidget {
         Navigator.of(context).pop(); // You can use pop to go back to the previous screen
       },
       child: Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 10),
       child: Stack(
         children: [
           // Container for the white border
@@ -159,7 +165,7 @@ class UndoImageContainer extends StatelessWidget {
             ),
           ),
           // Arrow pointing to the middle of the white border
-          Positioned(
+          const Positioned(
             top: 50, // Adjust the top position as needed
             left: 75, // Adjust the left position to center the arrow
             child: Icon(

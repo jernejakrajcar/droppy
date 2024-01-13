@@ -7,7 +7,6 @@ import 'package:droppy/screens/relaxation_games_screen.dart';
 import 'package:droppy/screens/exercises/yoga_screen.dart';
 import 'package:droppy/screens/exercises/meditation_screen.dart';
 import 'package:droppy/screens/exercises/breathing_screen.dart';
-import 'package:droppy/screens/exercises/yoga_screen.dart';
 import 'package:droppy/screens/yoga/stretching_screen.dart';
 import 'package:droppy/data/questions_data.dart';
 
@@ -23,7 +22,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -33,21 +32,21 @@ class MyApp extends StatelessWidget {
       title: 'Droppy Demo',
       theme: ThemeData(
         colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 136, 195, 243)),
+            ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 136, 195, 243)),
         useMaterial3: true,
       ),
       initialRoute: '/dnevnik',
       routes: {
         '/': (context) => const MyHomePage(title: "Home Page"),
-        '/dnevnik': (context) => DiaryScreen(),
-        '/moodTracker': (context) => MoodTrackerScreen(),
-        '/vaje': (context) => ExercisesScreen(),
-        '/igre': (context) => GamesScreen(),
-        '/yoga': (context) => YogaScreen(),
-        '/meditation': (context) => MeditationScreen(),
-        '/breathing': (context) => BreathingScreen(),
-        '/grateful': (context) => GratefulScreen(),
-        '/stretching': (context) => StretchingScreen(),
+        '/dnevnik': (context) => const DiaryScreen(),
+        '/moodTracker': (context) => const MoodTrackerScreen(),
+        '/vaje': (context) => const ExercisesScreen(),
+        '/igre': (context) => const GamesScreen(),
+        '/yoga': (context) => const YogaScreen(),
+        '/meditation': (context) => const MeditationScreen(),
+        '/breathing': (context) => const BreathingScreen(),
+        '/grateful': (context) => const GratefulScreen(),
+        '/stretching': (context) => const StretchingScreen(),
       },
     );
   }
@@ -101,13 +100,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
         //backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 154, 187, 222),
+        backgroundColor: const Color.fromARGB(255, 154, 187, 222),
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Container(
-        color: Color.fromARGB(
+        color: const Color.fromARGB(
             255, 154, 187, 222), // Adjust the opacity and color as needed
 
         // Center is a layout widget. It takes a single child and positions it
@@ -135,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 width: 200, // Set the desired width
                 height: 200, // Set the desired height
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/droppy.png'),
                     fit: BoxFit.cover,
@@ -144,14 +143,14 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(
+                  color: const Color.fromARGB(
                       255, 89, 130, 197), // Set the background color of the box
                   border:
                       Border.all(color: Colors.black), // Set the border color
                   borderRadius:
                       BorderRadius.circular(12.0), // Set the border radius
                 ),
-                padding: EdgeInsets.all(20), // Add padding to the container
+                padding: const EdgeInsets.all(20), // Add padding to the container
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -162,37 +161,37 @@ class _MyHomePageState extends State<MyHomePage> {
                         onPressed: () {
                           Navigator.pushNamed(context, '/igre');
                         },
-                        child: Text('Relaxation Games'),
+                        child: const Text('Relaxation Games'),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ButtonTheme(
                       minWidth: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/moodTracker');
                         },
-                        child: Text('Mood Tracker'),
+                        child: const Text('Mood Tracker'),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ButtonTheme(
                       minWidth: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/vaje');
                         },
-                        child: Text('Exercises'),
+                        child: const Text('Exercises'),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ButtonTheme(
                       minWidth: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/dnevnik');
                         },
-                        child: Text('Diary'),
+                        child: const Text('Diary'),
                       ),
                     ),
                   ],

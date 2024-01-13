@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class StretchingScreen extends StatelessWidget {
-  const StretchingScreen({Key? key}) : super(key: key);
+  const StretchingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -9,11 +9,11 @@ class StretchingScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Stretching'),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 154, 187, 222),
+        backgroundColor: const Color.fromARGB(255, 154, 187, 222),
       ),
       body: Container(
-        color: Color.fromARGB(255, 164, 187, 223),
-        child: Center(
+        color: const Color.fromARGB(255, 164, 187, 223),
+        child: const Center(
           child: Column(
             children: [
               // Top Container for Image
@@ -31,6 +31,8 @@ class StretchingScreen extends StatelessWidget {
 }
 
 class StretchingImageContainer extends StatelessWidget {
+  const StretchingImageContainer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,7 +42,7 @@ class StretchingImageContainer extends StatelessWidget {
           child: Container(
             width: 140, // Adjusted width to match StretchingImageContainer
             height: 150, // Adjusted height to match StretchingImageContainer
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/droppy.png"), // Updated to use local image
                 fit: BoxFit.contain,
@@ -54,18 +56,20 @@ class StretchingImageContainer extends StatelessWidget {
 }
 
 class StretchingBottomContainer extends StatelessWidget {
+  const StretchingBottomContainer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 450,
       height: 395,
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Color(0xFF5982C5), width: 2),
+        border: Border.all(color: const Color(0xFF5982C5), width: 2),
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Column(
+      child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           StretchingItemWidget('Downward dog', '45 sec'),
@@ -82,17 +86,17 @@ class StretchingItemWidget extends StatelessWidget {
   final String title;
   final String duration;
 
-  const StretchingItemWidget(this.title, this.duration);
+  const StretchingItemWidget(this.title, this.duration, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 75,
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        color: Color(0xFF5982C5),
+        color: const Color(0xFF5982C5),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -100,11 +104,11 @@ class StretchingItemWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            style: const TextStyle(color: Colors.white, fontSize: 18),
           ),
           Text(
             duration,
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            style: const TextStyle(color: Colors.white, fontSize: 18),
           ),
         ],
       ),
@@ -113,6 +117,8 @@ class StretchingItemWidget extends StatelessWidget {
 }
 
 class UndoImageContainer extends StatelessWidget {
+  const UndoImageContainer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -121,7 +127,7 @@ class UndoImageContainer extends StatelessWidget {
         Navigator.of(context).pop();
       },
       child: Container(
-        margin: EdgeInsets.only(bottom: 10),
+        margin: const EdgeInsets.only(bottom: 10),
         child: Stack(
           children: [
             // Container for the white border
@@ -151,7 +157,7 @@ class UndoImageContainer extends StatelessWidget {
               ),
             ),
             // Arrow pointing to the middle of the white border
-            Positioned(
+            const Positioned(
               top: 50,
               left: 75,
               child: Icon(

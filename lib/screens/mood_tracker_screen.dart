@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class MoodTrackerScreen extends StatefulWidget {
-  const MoodTrackerScreen({Key? key}) : super(key: key);
+  const MoodTrackerScreen({super.key});
 
   @override
   _MoodTrackerScreenState createState() => _MoodTrackerScreenState();
@@ -27,10 +27,10 @@ class _MoodTrackerScreenState extends State<MoodTrackerScreen> {
       appBar: AppBar(
         title: const Text('Mood Tracker'),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 154, 187, 222),
+        backgroundColor: const Color.fromARGB(255, 154, 187, 222),
       ),
       body: Container(
-        color: Color.fromARGB(255, 255, 255, 255),
+        color: const Color.fromARGB(255, 255, 255, 255),
         child: Column(
           children: <Widget>[
             TableCalendar(
@@ -50,7 +50,7 @@ class _MoodTrackerScreenState extends State<MoodTrackerScreen> {
                 });
               },
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: _buildDiaryEntries(),
             ),
@@ -65,10 +65,10 @@ class _MoodTrackerScreenState extends State<MoodTrackerScreen> {
     // Fetch the diary entries for the selected day from your Isar database.
     // Display the entries in a ListView or another appropriate widget.
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Text(
         'Diary entries for $_selectedDay will be displayed here.',
-        style: TextStyle(fontSize: 18),
+        style: const TextStyle(fontSize: 18),
       ),
     );
   }
