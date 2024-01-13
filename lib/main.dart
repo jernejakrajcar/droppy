@@ -9,13 +9,17 @@ import 'package:droppy/screens/exercises/meditation_screen.dart';
 import 'package:droppy/screens/exercises/breathing_screen.dart';
 import 'package:droppy/screens/exercises/yoga_screen.dart';
 import 'package:droppy/screens/yoga/stretching_screen.dart';
+import 'package:droppy/data/questions_data.dart';
 
 import 'package:flutter/material.dart';
 import 'package:droppy/services/isar_service.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
   IsarService isarService = IsarService();
+  QuestionData questionData = QuestionData(isarService: isarService);
+
+  await questionData.addPreparedQuestions();
 }
 
 class MyApp extends StatelessWidget {
@@ -44,7 +48,6 @@ class MyApp extends StatelessWidget {
         '/breathing': (context) => BreathingScreen(),
         '/grateful': (context) => GratefulScreen(),
         '/stretching': (context) => StretchingScreen(),
-
       },
     );
   }
