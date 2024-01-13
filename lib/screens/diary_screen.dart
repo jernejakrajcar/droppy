@@ -1,38 +1,52 @@
 import 'dart:math';
-
+import 'package:droppy/entities/diary_entry.dart';
+import 'package:droppy/services/isar_service.dart';
 import 'package:flutter/material.dart';
 
-class DiaryScreen extends StatelessWidget {
+class DiaryScreen extends StatefulWidget {
   const DiaryScreen({Key? key}) : super(key: key);
 
   @override
+  _DiaryScreenState createState() => _DiaryScreenState();
+}
+
+class _DiaryScreenState extends State<DiaryScreen> {
+  late String currentQuestion;
+  late TextEditingController _textEditingController;
+
+  @override
+  void initState() {
+    super.initState();
+    currentQuestion = _generateRandomQuestion();
+    _textEditingController = TextEditingController();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final questionWidth = screenWidth * 0.5;
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Diary'),
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 154, 187, 222),
       ),
-      body: Stack(
-        children: [
-          Container(
-            color: Color.fromARGB(
-                255, 154, 187, 222), // Adjust the opacity and color as needed
-          ),
-          Container(
-            width: 200, // Set the desired width
-            height: 200, // Set the desired height
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/droppy.png'),
-                fit: BoxFit.cover,
+      body: Builder(builder: (BuildContext builderContext) {
+        return Stack(
+          children: [
+            Container(
+              color: Color.fromARGB(255, 154, 187, 222),
+            ),
+            Container(
+              width: 200,
+              height: 200,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/droppy.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          Container(
-              height: 50,
+            Container(
+              height: 80,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
@@ -40,44 +54,54 @@ class DiaryScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(width: 200, height: 50),
+                      Container(width: 200, height: 80),
                       Container(
                         width: 200,
-                        height: 50,
+                        height: 80,
                         child: Text(
-                          _generateRandomQuestion(),
+                          currentQuestion,
                           style: TextStyle(fontSize: 20),
                         ),
                       )
                     ],
                   )
                 ],
-              )),
-          ListView(
-            padding: EdgeInsets.all(15),
-            children: [
-              const SizedBox(height: 110),
-              TextField(
-                maxLines: 20,
-                decoration: InputDecoration(
-                  labelText: '05/01/2024 ',
-                  hintText: 'Start typing here...',
-                  filled: true,
-                  fillColor: Colors.white,
-                  alignLabelWithHint: true,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)),
+              ),
+            ),
+            ListView(
+              padding: EdgeInsets.all(15),
+              children: [
+                const SizedBox(height: 110),
+                TextField(
+                  controller: _textEditingController,
+                  maxLines: 20,
+                  decoration: InputDecoration(
+                    labelText: '05/01/2024 ',
+                    hintText: 'Start typing here...',
+                    filled: true,
+                    fillColor: Colors.white,
+                    alignLabelWithHint: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
                 ),
-              )
-            ],
-          ),
-        ],
-      ),
+                ElevatedButton(
+                  onPressed: () {
+                    _saveDiaryEntry(
+                        builderContext, _textEditingController.text);
+                  },
+                  child: Text('Save'),
+                ),
+              ],
+            ),
+          ],
+        );
+      }),
     );
   }
 
   String _generateRandomQuestion() {
-    // Generate a random question
     Random random = Random();
     int questionNum = random.nextInt(10);
 
@@ -105,5 +129,24 @@ class DiaryScreen extends StatelessWidget {
     }
 
     return "Hi.";
+  }
+
+  void _saveDiaryEntry(BuildContext context, String text) async {
+    DateTime currentDate = DateTime.now();
+    DiaryEntry newDiaryEntry = DiaryEntry(
+      entryDate: currentDate,
+      content: text,
+    );
+
+    await IsarService().saveDiaries(newDiaryEntry);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Diary entry saved successfully!')),
+    );
+
+    setState(() {
+      _textEditingController.clear();
+      currentQuestion = _generateRandomQuestion();
+    });
   }
 }
