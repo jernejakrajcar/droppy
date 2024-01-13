@@ -20,7 +20,7 @@ class GamesScreen extends StatelessWidget {
 
         child: const Center(
           child: Column(
-            children: <Widget>[],
+            children: <Widget>[Text("Coming soon! ")],
           ),
         ),
       ),

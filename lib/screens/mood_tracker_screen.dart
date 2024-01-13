@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:droppy/entities/diary_entry.dart';
+import 'package:droppy/services/isar_service.dart';
+import 'package:droppy/entities/question.dart';
 
 class MoodTrackerScreen extends StatefulWidget {
   const MoodTrackerScreen({super.key});
@@ -61,10 +64,77 @@ class _MoodTrackerScreenState extends State<MoodTrackerScreen> {
   }
 
   Widget _buildDiaryEntries() {
-    // Add your logic here to fetch and display diary entries based on _selectedDay
-    // Fetch the diary entries for the selected day from your Isar database.
-    // Display the entries in a ListView or another appropriate widget.
-    return Container(
+    return FutureBuilder<List<DiaryEntry>>(
+      future: IsarService().getAllDiaryEntries(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator(); // Prilagodite prikaz čakanja po potrebi
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          final allDiaryEntries = snapshot.data;
+
+          if (allDiaryEntries != null && allDiaryEntries.isNotEmpty) {
+            // Filtrirajte dnevniške vnose za izbrani datum (_selectedDay)
+            final filteredDiaryEntries = allDiaryEntries
+                .where((entry) =>
+                    entry.entryDate.year == _selectedDay.year &&
+                    entry.entryDate.month == _selectedDay.month &&
+                    entry.entryDate.day == _selectedDay.day)
+                .toList();
+
+            if (filteredDiaryEntries.isNotEmpty) {
+              return ListView.builder(
+                itemCount: filteredDiaryEntries.length,
+                itemBuilder: (context, index) {
+                  final diaryEntry = filteredDiaryEntries[index];
+                  final diaryQuestion = filteredDiaryEntries[index].questionId;
+
+                  return Column(
+                    children: [
+                      FutureBuilder<Question?>(
+                        future: IsarService().getQuestionById(diaryQuestion),
+                        builder: (context, questionSnapshot) {
+                          if (questionSnapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return CircularProgressIndicator(); // Prilagodite prikaz čakanja po potrebi
+                          } else if (questionSnapshot.hasError) {
+                            return Text('Error: ${questionSnapshot.error}');
+                          } else {
+                            final question = questionSnapshot.data;
+
+                            if (question != null) {
+                              return ListTile(
+                                title: Text('Question: ${question.text}'),
+                                // Dodajte druge informacije o vprašanju, če jih želite prikazati
+                              );
+                            } else {
+                              return Text('Question not found.');
+                            }
+                          }
+                        },
+                      ),
+                      ListTile(
+                        title: Text(diaryEntry.content),
+                        // Dodajte druge informacije o vnosu, če jih želite prikazati
+                      ),
+                      Divider(), // Dodajte razdeljevalec med vnosi dnevnika
+                    ],
+                  );
+                },
+              );
+            } else {
+              return Text('No diary entries for $_selectedDay.');
+            }
+          } else {
+            return Text('No diary entries available.');
+          }
+        }
+      },
+    );
+  }
+}
+    /*return Container(
       padding: const EdgeInsets.all(16),
       child: Text(
         'Diary entries for $_selectedDay will be displayed here.',
@@ -72,4 +142,4 @@ class _MoodTrackerScreenState extends State<MoodTrackerScreen> {
       ),
     );
   }
-}
+}*/

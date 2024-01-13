@@ -34,6 +34,9 @@ class _DiaryScreenState extends State<DiaryScreen> {
         backgroundColor: Color.fromARGB(255, 154, 187, 222),
       ),
       body: Builder(builder: (BuildContext builderContext) {
+        var today = DateTime.now();
+        String formattedData =
+            "${today.year}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}";
         return Stack(
           children: [
             Container(
@@ -80,7 +83,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                   controller: _textEditingController,
                   maxLines: 20,
                   decoration: InputDecoration(
-                    labelText: '05/01/2024 ',
+                    labelText: formattedData,
                     hintText: 'Start typing here...',
                     filled: true,
                     fillColor: Colors.white,
