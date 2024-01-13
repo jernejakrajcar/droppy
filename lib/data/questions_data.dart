@@ -28,7 +28,7 @@ class QuestionData {
 
     for (var question in preparedQuestions) {
       // check if the question already exists in db
-      var exists = await isarService.getQuestionById(question.id);
+      var exists = await isarService.getQuestionByText(question.text);
 
       if (exists == null) {
         await isarService.saveQuestion(question);

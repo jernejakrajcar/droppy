@@ -6,6 +6,7 @@ part 'question.g.dart';
 class Question {
   Id id = Isar.autoIncrement;
 
+  @Index()
   String text;
 
   Question({required this.text});
