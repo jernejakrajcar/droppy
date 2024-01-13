@@ -1,6 +1,7 @@
 import 'package:droppy/entities/diary_entry.dart';
 import 'package:droppy/entities/exercise.dart';
 import 'package:droppy/entities/diary.dart';
+import 'package:droppy/entities/question.dart';
 // import 'package:droppy/lib/entities/mood_tracker.dart';
 // import 'package:droppy/lib/entities/relaxation_games.dart';
 import 'package:path_provider/path_provider.dart';
@@ -14,10 +15,10 @@ class IsarService {
   IsarService() {
     db = openDB();
     //cleanDb();
-    //deleteAllGifts();
     initializeExercises();
     initializeDiaryEntry();
     initializeDiary();
+    initializeQuestions();
   }
   Future<void> initializeExercises() async {
     isar = await db;
@@ -34,14 +35,24 @@ class IsarService {
     final diarys = getAllDiaries();
   }
 
+  Future<void> initializeQuestions() async {
+    isar = await db;
+    final questions = getAllQuestions();
+  }
+
   Future<void> saveExercise(Exercise newExercises) async {
     final isar = await db;
     isar.writeTxnSync(() => isar.exercises.putSync(newExercises));
   }
 
-  Future<void> saveDiaries(DiaryEntry newDiaries) async {
+  Future<void> saveDiaries(DiaryEntry newEntry) async {
     final isar = await db;
-    isar.writeTxnSync(() => isar.diaryEntrys.putSync(newDiaries));
+    isar.writeTxnSync(() => isar.diaryEntrys.putSync(newEntry));
+  }
+
+  Future<void> saveQuestion(Question newQuestion) async {
+    final isar = await db;
+    isar.writeTxnSync(() => isar.questions.putSync(newQuestion));
   }
 
   Future<Exercise?> getExerciseByName(String name) async {
@@ -81,9 +92,21 @@ class IsarService {
     return diaryEntryQuery.findAll();
   }
 
+  Future<List<Question>> getAllQuestions() async {
+    final isar = await db;
+    final questionsQuery = isar.questions.where();
+    print(questionsQuery);
+    return questionsQuery.findAll();
+  }
+
   Future<void> cleanDb() async {
     final isar = await db;
     await isar.writeTxn(() => isar.clear());
+  }
+
+  Future<Question?> getQuestionById(int id) async {
+    final isar = await db;
+    return isar.questions.get(id);
   }
 
   Future<Exercise?> getExerciseById(int id) async {
@@ -109,7 +132,7 @@ class IsarService {
 
     if (Isar.instanceNames.isEmpty) {
       return await Isar.open(
-        [ExerciseSchema, DiaryEntrySchema, DiarySchema],
+        [ExerciseSchema, DiaryEntrySchema, DiarySchema, QuestionSchema],
         inspector: true,
         directory: path,
       );
