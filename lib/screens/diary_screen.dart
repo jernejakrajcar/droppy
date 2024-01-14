@@ -52,8 +52,9 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 ),
               ),
             ),
+            const SizedBox(height: 30),
             Container(
-              height: 80,
+              height: 120,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
@@ -61,13 +62,23 @@ class _DiaryScreenState extends State<DiaryScreen> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(width: 200, height: 80),
                       Container(
-                        width: 200,
-                        height: 80,
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          height: 120),
+                      Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 214, 233, 255),
+                          borderRadius: BorderRadius.circular(
+                              10), // Dodajte border-radius tukaj
+                        ),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                        width: MediaQuery.of(context).size.width * 0.57,
+                        height: 120,
                         child: Text(
                           currentQuestion,
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 16),
                         ),
                       )
                     ],
@@ -75,13 +86,14 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 ],
               ),
             ),
+            const SizedBox(height: 40),
             ListView(
               padding: EdgeInsets.all(15),
               children: [
                 const SizedBox(height: 110),
                 TextField(
                   controller: _textEditingController,
-                  maxLines: 20,
+                  maxLines: 18,
                   decoration: InputDecoration(
                     labelText: formattedData,
                     hintText: 'Start typing here...',
