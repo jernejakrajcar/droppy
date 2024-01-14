@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/dnevnik',
       routes: {
-        '/': (context) => const MyHomePage(title: "Home Page"),
+        '/': (context) => const MyHomePage(title: "DROPPY"),
         '/dnevnik': (context) => const DiaryScreen(),
         '/moodTracker': (context) => const MoodTrackerScreen(),
         '/vaje': (context) => const ExercisesScreen(),

@@ -43,8 +43,8 @@ class StretchingImageContainer extends StatelessWidget {
             ..translate(130.0, 50.0)
             ..rotateZ(0.0),
           child: Container(
-            width: 140,
-            height: 150,
+            width: 160,
+            height: 160,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/droppy.png"),

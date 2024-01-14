@@ -7,20 +7,31 @@ class GamesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Relexation Games'),
+        title: const Text('Relaxation Games'),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 154, 187, 222),
       ),
       body: Container(
-        color: const Color.fromARGB(
-            255, 154, 187, 222), // Adjust the opacity and color as needed
-
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-
-        child: const Center(
+        color: const Color.fromARGB(255, 154, 187, 222),
+        child: Center(
           child: Column(
-            children: <Widget>[Text("Coming soon! ")],
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              // Add the image of Droppy
+              Image.asset(
+                'assets/droppy.png', // Adjust the image path as needed
+                width: 600, // Set the desired width
+                height: 600, // Set the desired height
+              ),
+              const SizedBox(height: 0),
+              Text(
+                "Coming soon!",
+                style: TextStyle(
+                  fontSize: 24, // Set the desired font size
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
         ),
       ),

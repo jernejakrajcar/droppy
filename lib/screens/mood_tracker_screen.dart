@@ -104,13 +104,22 @@ class _MoodTrackerScreenState extends State<MoodTrackerScreen> {
                             final question = questionSnapshot.data;
 
                             if (question != null) {
-                              return ListTile(
-                                title: Text('Question: ${question.text}'),
-                                // Dodajte druge informacije o vprašanju, če jih želite prikazati
-                              );
-                            } else {
-                              return Text('Question not found.');
-                            }
+                            return Container(
+                              color: const Color.fromARGB(255, 154, 187, 222), 
+                              padding: EdgeInsets.all(8),
+                              child: ListTile(
+                                title: Text(
+                                  'Question: ${question.text}',
+                                  style: TextStyle(
+                                    color: Colors.white, // Set text color
+                                  ),
+                                ),
+                                // Add other information about the question if needed
+                              ),
+                            );
+                          } else {
+                            return Text('Question not found.');
+                          }
                           }
                         },
                       ),
@@ -123,9 +132,18 @@ class _MoodTrackerScreenState extends State<MoodTrackerScreen> {
                   );
                 },
               );
-            } else {
-              return Text('No diary entries for $_selectedDay.');
-            }
+           } else {
+              return Container(
+                color: const Color.fromARGB(255, 154, 187, 222), // Set the background color
+                padding: EdgeInsets.all(45),
+                child: Text(
+                  'No diary entries for $_selectedDay.',
+                  style: TextStyle(
+                    color: Colors.white, // Set text color
+                  ),
+                ),
+              );
+            } 
           } else {
             return Text('No diary entries available.');
           }
